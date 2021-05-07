@@ -12,5 +12,8 @@ def index():
     """returns Hello HBNB!"""
     return 'Hello HBNB!'
 
+
 if __name__ == '__main__':
+    """Runs a flask app"""
+
     app.run(host='0.0.0.0', port='5000')
