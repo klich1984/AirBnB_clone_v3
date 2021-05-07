@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 from api.v1.views import app_views
-from flask import jsonify, make_response
+from flask import jsonify
 import json
 from models.state import State
 from models.amenity import Amenity
@@ -14,8 +14,7 @@ from models.place import Place
 def app_status():
     """method app_status"""
     dictStatus = {"status": "OK"}
-    jsonStatus = json.dumps(dictStatus)
-    return jsonify(jsonStatus)
+    return jsonify(dictStatus)
 
 
 @app_views.route("/stats")
@@ -30,7 +29,5 @@ def obj_count():
     for key, value in m_new_dict.items():
         counter = storage.count(value)
         cls_dict[key] = counter
-    print(cls_dict)
 
-    count = make_response(cls_dict)
-    return jsonify(count)
+    return jsonify(cls_dict)
