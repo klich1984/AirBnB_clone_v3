@@ -78,7 +78,10 @@ class DBStorage:
     def get(self, cls, id):
         """i am get"""
         new_dict_ = self.all()
-        key = cls.__name__ + '.' + id
+        if isinstance(cls, str):
+            key = eval(cls).__name__ + "." + id
+        else:
+            key = cls.__name__ + '.' + id
         if key in new_dict_:
             return new_dict_[key]
         return None
