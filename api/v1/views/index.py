@@ -30,4 +30,5 @@ def obj_count():
         counter = storage.count(value)
         cls_dict[key] = counter
 
-    return jsonify(cls_dict)
+    return cls_dict
+    # return jsonify(cls_dict)
