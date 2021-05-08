@@ -15,8 +15,7 @@ from models.place import Place
 def app_status():
     """method app_status"""
     dictStatus = {"status": "OK"}
-    return jsonify(dictStatus)
-
+    return dictStatus
 
 @app_views.route("/stats")
 def obj_count():
