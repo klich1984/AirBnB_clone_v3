@@ -17,6 +17,7 @@ def app_status():
     dictStatus = {"status": "OK"}
     return dictStatus
 
+
 @app_views.route("/stats")
 def obj_count():
     """Count objects by its type"""
