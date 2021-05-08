@@ -23,13 +23,12 @@ def obj_count():
     """Count objects by its type"""
     from models import storage
 
-    m_new_dict = {"amenity": Amenity, "city": City,
-                  "place": Place, "review": Review,
-                  "state": State, "user": User}
+    m_new_dict = {"amenities": Amenity, "cities": City,
+                  "places": Place, "reviews": Review,
+                  "states": State, "users": User}
     cls_dict = {}
     for key, value in m_new_dict.items():
         counter = storage.count(value)
         cls_dict[key] = counter
 
     return cls_dict
-    # return jsonify(cls_dict)
