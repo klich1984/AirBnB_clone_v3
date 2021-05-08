@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """init flask aplication"""
-from flask import Flask, Blueprint, jsonify
+from flask import Flask, Blueprint, jsonify, make_response
 from models import storage
 from api.v1.views import app_views
 from os import getenv
@@ -21,7 +21,7 @@ def teardown_app(error):
 def page_not_found(e):
     """Handles not found errors"""
     err_dict = {"error": "Not found"}
-    return err_dict
+    return make_response(jsonify(err_dict), 404)
 
 
 if __name__ == "__main__":
