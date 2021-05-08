@@ -21,7 +21,7 @@ def teardown_app(error):
 def page_not_found(e):
     """Handles not found errors"""
     err_dict = {"error": "Not found"}
-    return jsonify(err_dict)
+    return err_dict
 
 
 if __name__ == "__main__":
