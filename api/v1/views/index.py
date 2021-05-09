@@ -2,7 +2,6 @@
 """Displays blueprint pages"""
 from api.v1.views import app_views
 from flask import jsonify
-import json
 from models.state import State
 from models.amenity import Amenity
 from models.city import City
