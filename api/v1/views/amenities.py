@@ -32,7 +32,8 @@ def amenities_get_id(amenity_id=None):
                     for key, value in update_dict.items():
                         setattr(my_amenities_obj, key, value)
                         my_amenities_obj.save()
-                    return make_response(jsonify(my_amenities_obj.to_dict()), 200)
+                    return make_response(jsonify(my_amenities_obj.to_dict()),
+                                         200)
                 else:
                     abort(400, "Not a JSON")
         else:
