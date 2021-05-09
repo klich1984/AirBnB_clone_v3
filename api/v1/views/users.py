@@ -43,13 +43,17 @@ def user_get_id(user_id=None):
         if request.method == 'POST':
             my_json = request.get_json(silent=True)
             if my_json is not None:
-                if "name" in my_json:
-                    name = my_json["name"]
-                    new_user = User(name=name)
-                    new_user.save()
-                    return make_response(jsonify(new_user.to_dict()), 201)
+                if "email" in my_json:
+                    if "password" in my_json:
+                        email = my_json["email"]
+                        password = my_json["password"]
+                        new_user = User(email=email, password=password)
+                        new_user.save()
+                        return make_response(jsonify(new_user.to_dict()), 201)
+                    else:
+                        abort(400, "Missing password")
                 else:
-                    abort(400, "Missing name")
+                    abort(400, "Missing email")
             else:
                 # print("funcionó el none!")
                 abort(400, "Not a JSON")
