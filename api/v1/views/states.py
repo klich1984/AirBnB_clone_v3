@@ -29,8 +29,10 @@ def states_get_id(state_id=None):
                 if request.method == 'PUT':
                     update_dict = request.get_json(silent=True)
                     if update_dict is not None:
-                        update_obj = State(update_dict)
-                        return make_response(jsonify(update_obj.to_dict()), 200)
+                        for key, value in update_dict.items():
+                            setattr(my_state_obj, key, value)
+                            my_state_obj.save()
+                        return make_response(jsonify(my_state_obj.to_dict()), 200)
                     else:
                         abort(400, "Not a JSON")
         else:
