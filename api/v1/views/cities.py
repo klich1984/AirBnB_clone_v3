@@ -1,4 +1,4 @@
-#!/usr/bin/phyton3
+#!/usr/bin/python3
 """REST full view for cities objects"""
 from flask import Flask, abort, jsonify, make_response
 from flask import request
