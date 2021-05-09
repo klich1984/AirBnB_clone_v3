@@ -19,22 +19,22 @@ def states_get_id(state_id=None):
         my_state_obj = storage.get(State, state_id)
 
         if my_state_obj is not None:
-                if request.method == 'DELETE':
-                    storage.delete(my_state_obj)
-                    return make_response(jsonify({}), 200)
+            if request.method == 'DELETE':
+                storage.delete(my_state_obj)
+                return make_response(jsonify({}), 200)
 
-                if request.method == 'GET':
-                    return jsonify(my_state_obj.to_dict())
+            if request.method == 'GET':
+                return jsonify(my_state_obj.to_dict())
 
-                if request.method == 'PUT':
-                    update_dict = request.get_json(silent=True)
-                    if update_dict is not None:
-                        for key, value in update_dict.items():
-                            setattr(my_state_obj, key, value)
-                            my_state_obj.save()
-                        return make_response(jsonify(my_state_obj.to_dict()), 200)
-                    else:
-                        abort(400, "Not a JSON")
+            if request.method == 'PUT':
+                update_dict = request.get_json(silent=True)
+                if update_dict is not None:
+                    for key, value in update_dict.items():
+                        setattr(my_state_obj, key, value)
+                        my_state_obj.save()
+                    return make_response(jsonify(my_state_obj.to_dict()), 200)
+                else:
+                    abort(400, "Not a JSON")
         else:
             abort(404)
     else:
