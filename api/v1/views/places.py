@@ -75,6 +75,7 @@ def place_create(city_id=None):
     else:
         abort(404)
 
+
 @app_views.route("/places/<place_id>", methods=["PUT"])
 def place_update(place_id=None):
     """Updates a places from a dict"""
