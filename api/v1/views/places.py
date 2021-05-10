@@ -12,14 +12,12 @@ from models import storage
 @app_views.route("/cities/<city_id>/places", methods=["GET"])
 def place_from_cities(city_id=None):
     """Retrieves all places from a cities"""
-
     # states_dict = storage.all(State)
-    places_dict = storage.all(Place)
-    places_list = []
-
     my_city_obj = storage.get(City, city_id)
 
     if my_city_obj is not None:
+        places_dict = storage.all(Place)
+        places_list = []
         for class_id, class_dict in places_dict.items():
             if city_id == class_dict.city_id:
                 city_obj = storage.get(Place, class_dict.id)
@@ -49,11 +47,6 @@ def place_get_id(place_id=None):
 @app_views.route("/cities/<city_id>/places", methods=["POST"])
 def place_create(city_id=None):
     """Creates a places within a cities by its id"""
-
-    # states_dict = storage.all(State)
-    # places_dict = storage.all(Place)
-    # cities_list = []
-
     my_cities_obj = storage.get(City, city_id)
 
     if my_cities_obj is not None:
@@ -64,12 +57,16 @@ def place_create(city_id=None):
                 if my_user_obj is not None:
                     if "name" in my_json:
                         name = my_json["name"]
-                        new_p = Place(name=name, user_id=my_json['city_id'],
+                        new_p = Place(name=name, user_id=my_json['user_id'],
                                       city_id=city_id)
-                new_p.save()
-                return make_response(jsonify(new_p.to_dict()), 201)
+                        new_p.save()
+                        return make_response(jsonify(new_p.to_dict()), 201)
+                    else:
+                        abort(400, "Missing name")
+                else:
+                    abort(404)
             else:
-                abort(400, "Missing name")
+                abort(400, "Missing user_id")
         else:
             abort(400, "Not a JSON")
     else:
