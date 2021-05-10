@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """init flask aplication"""
 from flask import Flask, Blueprint, jsonify, make_response
+from flask_cors import CORS
 from models import storage
 from api.v1.views import app_views
 from os import getenv
@@ -10,6 +11,7 @@ import json
 app = Flask(__name__)
 app.url_map.strict_slashes = False
 app.register_blueprint(app_views)
+cors = CORS(app, resources={r"/api/*": {"origins": "0.0.0.0"}})
 
 
 @app.teardown_appcontext
